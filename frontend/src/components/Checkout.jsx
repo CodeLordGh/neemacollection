@@ -27,11 +27,11 @@ const Checkout = () => {
               placeholder="Size..."
               className="bg-white text-gray mt-4 px-1 py-1 w-60 rounded focus:outline-none"
             />
-            <button className="bg-gray text-white mt-4 px-1 py-1 w-60 rounded">Add to cart</button>
+            <button className="bg-gray text-white mt-4 px-1 py-1 w-60 rounded font-bold">Add to cart</button>
            </div>
            <div className="mt-4">
-              <button className="text-gray bg-white px-4 py-1 w-24 rounded">Gallery</button>
-              <button className="text-gray bg-white px-4 py-1 ml-10 w-24 rounded">Share</button>
+              <button className="text-gray bg-white px-4 py-1 w-24 rounded font-bold">Gallery</button>
+              <button className="text-gray bg-white px-4 py-1 ml-10 w-24 rounded font-bold">Share</button>
            </div>
         </div>
 
