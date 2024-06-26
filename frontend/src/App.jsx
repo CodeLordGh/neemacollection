@@ -72,5 +72,4 @@ function RequireAdmin({ children }) {
   return children;
 }
 
-
 export default App;
