@@ -98,6 +98,7 @@ const deductPaymentFromWallet = async (user: any, amount: number) => {
  * @return {Promise<void>} A promise that resolves when the orders are retrieved successfully or rejects with an error.
  */
 export const getOrders = async (req: any, res: Response) => {
+  console.log(req.headers)
   try {
     const orders: IOrder[] = await Order.find({ user: req.user?._id });
 

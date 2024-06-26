@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
 import passport from "../utils/auth.strategy";
 
-if (process.env.NODE_ENV!== 'production') {
+if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
 
@@ -14,11 +14,11 @@ export const register = async (req: any, res: Response) => {
     const { email, password, username, phone } = req.body;
 
     // check if all fields are filled and passes validation
-    if (!email ||!password ||!username ||!phone) {
+    if (!email || !password || !username || !phone) {
         return res.status(400).json({ message: 'Please enter all fields' });
     }
     // check if name only conatins letters and sapces, password length greater than 6, email is valid and phone number is valid
-    if (!/^[a-zA-Z\s]*$/.test(username) || password.length < 6 ||!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email) ||!/^\d{10}$/.test(phone)) {
+    if (!/^[a-zA-Z\s]*$/.test(username) || password.length < 6 || !/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(email) || !/^\d{10}$/.test(phone)) {
         return res.status(400).json({ message: 'Invalid input' });
     }
     // check if user exist in the database
@@ -32,7 +32,7 @@ export const register = async (req: any, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // create new user
-    const newUser = new User({...req.body, password: hashedPassword });
+    const newUser = new User({ ...req.body, password: hashedPassword });
 
     if (email === process.env.ADMIN_EMAIL) {
         newUser.isAdmin = true;
@@ -68,6 +68,17 @@ export const login = (req: any, res: Response) => {
 
             const token = jwt.sign({ sub: user._id }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '1h' } as any);
             req.session.jwt = token;
+
+            console.log(req.sessionID)
+
+            // Set a cookie with the session ID
+            res.cookie('sessionId', req.sessionID, {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'lax',
+                maxAge: 3600000, // 1 hour
+            });
+
             return res.json({ message: `user ${user.username} logged in` });
         });
     })(req, res);
@@ -88,5 +99,5 @@ export const dashboard = (req: any, res: Response) => {
     if (!req.user) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
-    res.json({ message:`Welcome, ${req.user.username}!` });
+    res.json({ message: `Welcome, ${req.user.username}!` });
 };

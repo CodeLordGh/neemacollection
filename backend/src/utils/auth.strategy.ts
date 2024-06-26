@@ -31,9 +31,9 @@ const opts = {
   jwtFromRequest: ExtractJwt.fromExtractors([
     ExtractJwt.fromAuthHeaderAsBearerToken(),
     (req: Request) => {
-      // console.log(req.headers.authorization);
-      const {jwt} = req.session as any
-      console.log(req.session)
+     
+      const { jwt } = req.session as any
+      // console.log(req.session)
       return jwt;
     },
   ]),
