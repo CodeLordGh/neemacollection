@@ -13,8 +13,41 @@ import AddProducts from "./components/products/addProducts";
 import ProductList from "./components/products/productlist";
 import Checkout from "./components/Checkout";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [authInfo, setAuthInfo] = useState({}) 
+
+  useEffect(() => {
+    const loggedIn = async () => {
+      await axios.get("http://localhost:3001/api/auth", {
+        headers: `Authorization: Bearer ${localStorage.getItem("neematoken")}`
+      }).then((res) => setAuthInfo(res.data))
+      .catch((err) => {
+        console.log(err)
+        alert(err.message)
+      })
+    }
+    loggedIn()
+  }, [])
+
+
+function RequireAdmin ({ children }) {
+
+  if (!authInfo.isAdmin ) {
+    return <Navigate to="/auth/login" replace />;
+  }
+  return children;
+}
+
+function RequireAuth({ children }) {
+  
+  if (!authInfo.isAuthenticated) {
+    return <Navigate to="/auth/login" replace />;
+  }
+  return children;
+}
+
   return (
     <div>
       <BrowserRouter>
@@ -23,12 +56,12 @@ function App() {
           <Route path="/auth/signup" element={<Auth />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/dashboard" element={<RequireAdmin><Dashboard /></RequireAdmin>} >
-          <Route
-            index
-            element={
-              <Navigate to="overview" replace />
-            }
-          />
+            <Route
+              index
+              element={
+                <Navigate to="overview" replace />
+              }
+           />
             <Route path="overview" element={<Overview />}/>
             <Route path="products/*" element={<Products />} >
             <Route
@@ -45,7 +78,7 @@ function App() {
             <Route path="notifications" element={<Notifications />}/>
           </Route>            
           <Route path="/" element={<Homepage />} />
-          <Route path="checkout" element={<Checkout />} />
+          <Route path="checkout" element={ <RequireAuth> <Checkout /></RequireAuth> } />
         </Routes>
       </BrowserRouter>
     </div>
@@ -54,31 +87,8 @@ function App() {
 
 
 // Higher-order component to protect routes
-// function RequireAuth({ children }) {
-//   const isLoggedIn = sessionStorage.getItem(jwt);
-//   if (!isLoggedIn) {
-//     return <Navigate to="/auth/login" replace />;
-//   }
-//   return children;
-// }
+
 
 // Higher-order component to protect admin routes
-async function RequireAdmin ({ children }) {
-  let authInfo
-  
-  await axios.get("http://localhost:3001/api/auth", {
-    headers: `Authorization: Bearer ${localStorage.getItem("neematoken")}`
-  }).then((res) => authInfo= res.data)
-  .catch((err) => {
-    console.log(err)
-    alert(err.message)
-    return
-  })
-
-  if (!authInfo.isAuthenticated ) {
-    return <Navigate to="/auth/login" replace />;
-  }
-  return children;
-}
 
 export default App;
