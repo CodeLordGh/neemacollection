@@ -48,7 +48,7 @@ const Homepage = () => {
 
         />
         )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4 ml-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-5 ml-14">
           {products.map((pro, index) => (
             <ProductItem
               key={index}
