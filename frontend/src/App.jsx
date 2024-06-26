@@ -12,6 +12,7 @@ import Products from "./components/dashboard/products";
 import AddProducts from "./components/products/addProducts";
 import ProductList from "./components/products/productlist";
 import Checkout from "./components/Checkout";
+import axios from "axios";
 
 function App() {
   return (
@@ -62,11 +63,19 @@ function App() {
 // }
 
 // Higher-order component to protect admin routes
-function RequireAdmin({ children }) {
-  const isLoggedIn = true
-  console.log(isLoggedIn)
-  const isAdmin = true;
-  if (!isLoggedIn || !isAdmin) {
+async function RequireAdmin ({ children }) {
+  let authInfo
+  
+  await axios.get("http://localhost:3001/api/auth", {
+    headers: `Authorization: Bearer ${localStorage.getItem("neematoken")}`
+  }).then((res) => authInfo= res.data)
+  .catch((err) => {
+    console.log(err)
+    alert(err.message)
+    return
+  })
+
+  if (!authInfo.isAuthenticated ) {
     return <Navigate to="/auth/login" replace />;
   }
   return children;

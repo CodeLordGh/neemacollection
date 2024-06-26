@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
  import { Link, Outlet, useLocation } from "react-router-dom";
 import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:3000", {
+const socket = io.connect("http://localhost:3001", {
   logLevel: 'warn', // or 'error'
 });
 
@@ -68,26 +68,8 @@ const [insights, setInsights] = useState([{}])
   }
 
   const components = [
-    {
-      name: "Overview",
-      link: "overview",
-    },
-    {
-      name: "Analitics",
-      link: "analitics",
-    },
-    {
-      name: "Reports",
-      link: "reports",
-    },
-    {
-      name: "Notifications",
-      link: "notifications",
-    },
-    {
-      name: "Products",
-      link: "products",
-    },
+
+     "overview", "reports","notifications","products"
   ];
   return (
     <productsContext.Provider value={{products}}>
@@ -103,13 +85,13 @@ const [insights, setInsights] = useState([{}])
                 <li
                   key={component.name}
                   className={`px-4 py-2 ${
-                    component.name === location ? "bg-[#FA61D0]" : ""
+                    component === location ? "bg-[#FA61D0]" : ""
                   } text-[#333]`}
                 >
                   <Link
-                    to={component.link}
+                    to={component}
                   >
-                    {component.name}
+                    {component.charAt(0).toUpperCase() + component.slice(1)}
                   </Link>
                 </li>
               ))}

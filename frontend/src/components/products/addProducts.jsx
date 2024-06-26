@@ -7,6 +7,9 @@ const AddProducts = () => {
   const [res, setRes] = useState([]);
   const [data, setData] = useState({});
   const [activeInput, setActiveInput] = useState("title");
+  const token = localStorage.getItem("neematoken")
+
+  console.log(token)
 
   const info = [
     { name: "title", type: "text" },
@@ -31,6 +34,7 @@ const AddProducts = () => {
           withCredentials: true,
           headers: {
             'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
           },
         });
       });
@@ -51,7 +55,9 @@ const AddProducts = () => {
         "http://localhost:3001/api/products",
         data,
         {
-          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       if (res.status === 201) {
