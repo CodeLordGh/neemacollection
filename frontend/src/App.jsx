@@ -11,7 +11,7 @@ import Notifications from "./components/dashboard/notifications";
 import Products from "./components/dashboard/products";
 import AddProducts from "./components/products/addProducts";
 import ProductList from "./components/products/productlist";
-import Orders from "./components/orders";
+import Checkout from "./components/Checkout";
 
 function App() {
   return (
@@ -44,8 +44,7 @@ function App() {
             <Route path="notifications" element={<Notifications />}/>
           </Route>            
           <Route path="/" element={<Homepage />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="checkout" element={<Checkout />} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -72,6 +71,5 @@ function RequireAdmin({ children }) {
   }
   return children;
 }
-
 
 export default App;
