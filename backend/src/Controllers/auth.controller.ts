@@ -69,17 +69,15 @@ export const login = (req: any, res: Response) => {
             const token = jwt.sign({ sub: user._id }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: '1h' } as any);
             req.session.jwt = token;
 
-            console.log(req.sessionID)
-
             // Set a cookie with the session ID
-            res.cookie('sessionId', req.sessionID, {
-                httpOnly: true,
-                secure: false,
-                sameSite: 'lax',
-                maxAge: 3600000, // 1 hour
-            });
+            // res.cookie('sessionId', req.sessionID, {
+            //     httpOnly: true,
+            //     secure: false,
+            //     sameSite: 'lax',
+            //     maxAge: 3600000, // 1 hour
+            // });
 
-            return res.json({ message: `user ${user.username} logged in` });
+            return res.status(200).json({ message: `user ${user.username} logged in`, token, isAdmin: user.isAdmin });
         });
     })(req, res);
 };

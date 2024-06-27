@@ -4,7 +4,7 @@ export const jwtSign = (user: any) => {
   const payload = {
     sub: user._id,
     username: user.username,
-    isAdmin: false
+    isAdmin: user.isAdmin
   };
 
   const secret = process.env.JWT_SECRET as string

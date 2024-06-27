@@ -29,23 +29,14 @@ const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
     methods: ["GET", "POST"],
-    credentials: true,
-  },
+    allowedHeaders: ["Content-Type", "Authorization"],},
 });
 
 app.use(express.json());
 app.use(cors({
   origin: "http://localhost:5173",
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization",
-    "Access-Control-Allow-Origin",
-    "Access-Control-Allow-Headers",
-    "Access-Control-Allow-Methods",
-    "Access-Control-Allow-Credentials",
-    "Access-Control-Allow-Origin",
-    "Access-Control-Allow-Methods",
-    "Access-Control-Allow-Headers",
-  ],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 app.use(express.urlencoded({ extended: true }));

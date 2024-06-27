@@ -16,8 +16,9 @@ const Login = () => {
     try {
       console.log(loginData)
       const res = await axios.post("http://localhost:3001/api/auth/login", loginData);
-      
+      console.log(res.data)
       localStorage.setItem("neematoken", res.data.token)
+      setIsLoading(false)
       res.data.isAdmin ? navigate("/dashboard") : navigate("/");
     } catch (error) {
       alert("Error logging in. Please try again in a few minutes");

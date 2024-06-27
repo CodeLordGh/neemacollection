@@ -25,7 +25,7 @@ function App() {
       }).then((res) => setAuthInfo(res.data))
       .catch((err) => {
         console.log(err)
-        alert(err.message)
+        // alert(err.message)
       })
     }
     loggedIn()

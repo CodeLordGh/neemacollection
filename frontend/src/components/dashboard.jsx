@@ -11,7 +11,7 @@ export const productsContext = createContext()
 const Dashboard = () => {
   let [products, setProducts] = useState([]);
   const [error, setError] = useState("");
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("neematoken")
 
   const location = useLocation().pathname
 
@@ -83,7 +83,7 @@ const [insights, setInsights] = useState([{}])
             <ul>
               {components.map((component) => (
                 <li
-                  key={component.name}
+                  key={component}
                   className={`px-4 py-2 ${
                     component === location ? "bg-[#FA61D0]" : ""
                   } text-[#333]`}
