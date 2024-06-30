@@ -16,6 +16,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Orders from "./components/orders";
 import OrderList from "./components/Orderlist";
+import Settings from "./components/Settings"
 
 function App() {
   const [authInfo, setAuthInfo] = useState({}) 
@@ -83,6 +84,7 @@ function RequireAuth({ children }) {
           <Route path="checkout" element={ <RequireAuth> <Checkout /></RequireAuth> } />
           <Route path="orderlist" element={<OrderList/>} />
           <Route path="orders" element={<Orders />} />
+          <Route path="settings" element={<Settings />} />
         </Routes>
       </BrowserRouter>
     </div>
