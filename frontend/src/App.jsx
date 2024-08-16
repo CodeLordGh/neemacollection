@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     const loggedIn = async () => {
-      await axios.get("http://localhost:3001/api/auth", {
+      await axios.get("https://neemacollection.onrender.com/api/auth", {
         headers: `Authorization: Bearer ${localStorage.getItem("neematoken")}`
       }).then((res) => setAuthInfo(res.data))
       .catch((err) => {
@@ -33,7 +33,7 @@ function App() {
     }
     loggedIn()
   }, [])
-
+  // https://neemacollection.onrender.com
 
 function RequireAdmin ({ children }) {
 

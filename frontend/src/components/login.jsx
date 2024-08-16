@@ -15,7 +15,7 @@ const Login = () => {
     setIsLoading(true);
     try {
       console.log(loginData)
-      const res = await axios.post("http://localhost:3001/api/auth/login", loginData);
+      const res = await axios.post("https://neemacollection.onrender.com/api/auth/login", loginData);
       console.log(res.data)
       localStorage.setItem("neematoken", res.data.token)
       setIsLoading(false)

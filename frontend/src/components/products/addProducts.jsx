@@ -30,7 +30,7 @@ const AddProducts = () => {
       const promises = files.map((file) => {
         const formData = new FormData();
         formData.append('my_files', file);
-        return axios.post('http://localhost:3001/api/image/upload', formData, {
+        return axios.post('https://neemacollection.onrender.com/api/image/upload', formData, {
           withCredentials: true,
           headers: {
             'Content-Type': 'multipart/form-data',

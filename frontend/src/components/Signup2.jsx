@@ -10,7 +10,7 @@ const Signup2 = ({ buttonText, signupData, setSignupData }) => {
     event.preventDefault();
     console.log(signupData)
     try {
-      const res = await axios.post("http://localhost:3001/api/auth/register",
+      const res = await axios.post("https://neemacollection.onrender.com/api/auth/register",
         signupData
       )
       res.data.isAdmin? navigate("/dashboard") : navigate("/")

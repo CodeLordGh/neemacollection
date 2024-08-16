@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
  import { Link, Outlet, useLocation } from "react-router-dom";
 import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:3001", {
+const socket = io.connect("https://neemacollection.onrender.com", {
   logLevel: 'warn', // or 'error'
 });
 

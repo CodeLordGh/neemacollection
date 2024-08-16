@@ -11,7 +11,7 @@ const Orders = () => {
         const getOrders = async () => {
           setIsLoading(true);
         //   axios.defaults.withCredentials = true; // Set withCredentials to true
-          const res = await axios.get('http://localhost:3001/api/orders', {
+          const res = await axios.get('https://neemacollection.onrender.com/api/orders', {
             withCredentials: true
           })
            .then(res => {

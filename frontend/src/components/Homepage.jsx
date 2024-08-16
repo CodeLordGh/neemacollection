@@ -13,7 +13,7 @@ const Homepage = () => {
   useEffect( () => {
     const getProducts = async ()=> {
       setIsLoading(true)
-      const res = await axios.get('http://localhost:3001/api/products')
+      const res = await axios.get('https://neemacollection.onrender.com/api/products')
     .then(res => {
       setIsLoading(false)
       return res.data
