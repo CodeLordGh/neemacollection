@@ -7,7 +7,7 @@
     "start": "ts-node src/server.ts",
     "build": "tsc",
     "dev": "nodemon ./src/server.ts",
-    "serve": "node dist/server.js"
+    "serve": "node ./dist/src/server.js"
   },
   "keywords": [],
   "author": "",
